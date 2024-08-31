@@ -16,7 +16,7 @@ const ServiceCard = ({ image, name, description, link }) => {
     >
       <Link
         className={`group transition ease-in-out delay-150 hover:scale-105`}
-        href={`/Services/Service/${link}`}
+        href={`/Services/${link}`}
       >
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
           <Image

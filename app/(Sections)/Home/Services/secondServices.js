@@ -6,7 +6,7 @@ const BlogCard = ({ image, name, description, link }) => {
   return (
     <Link
       className="group transition ease-in-out delay-150 hover:scale-105 shadow"
-      href={`/Services/Service/${link}`}
+      href={`/Services/${link}`}
     >
       <div className="flex flex-col lg:flex-row gap-8 rounded-md bg-gray-100 dark:bg-white shadow-lg shadow-gray-200/60 ">
         <div className="w-full lg:w-3/6 lg:h-full xl:h-60">
