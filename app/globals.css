@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active {
+  /* Styles for the active state */
+  filter: invert(44%) sepia(68%) saturate(7144%) hue-rotate(216deg)
+    brightness(96%) contrast(91%);
+}
+.bg-gradientdownRed {
+  background-image: radial-gradient(
+    140% 107.13% at 50% 10%,
+    transparent 37.41%,
+    #be123c80 69.27%,
+    #f43f5e 100%
+  );
+}
+.bg-gradientdown {
+  background-image: radial-gradient(
+    140% 107.13% at 50% 10%,
+    transparent 37.41%,
+    #364ef580 69.27%,
+    #6698ff 100%
+  );
+}
+
+._wiggle {
+  transition: 0.8s;
+  animation: 1.1s ease-in-out wiggle;
+  transform-origin: center bottom;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(10deg) scale(1);
+  }
+  25% {
+    transform: rotate(-10deg) scale(1.3);
+  }
+  50% {
+    transform: rotate(20deg) scale(1.3);
+  }
+  75% {
+    transform: rotate(-20deg) scale(1.3);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+  }
+}
