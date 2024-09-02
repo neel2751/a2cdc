@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-WLHPKM9C" />
       <body className={poppins.className}>{children}</body>
     </html>
   );

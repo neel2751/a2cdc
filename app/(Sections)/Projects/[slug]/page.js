@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "@/app/component/Header/navbar";
 import { SubMenu } from "@/app/component/Header/submenu";
 import Footer from "@/app/component/Footer/Footer";

@@ -867,6 +867,22 @@ export const FEATURES = [
 export const PORTFOLIO = [
   //Commercial
 
+  // #New Harbour Exchange Square 5th Floor Canary Wharf 37
+  {
+    id: 37,
+    title: "Harbour Exchange Square 3rd Floor Canary Wharf",
+    description: "",
+    project: "Commercial",
+    link: "harbour-exchange-square-3rd-floor-canary-wharf",
+    siteMaplink: "/Commercial/harbour-exchange-square-3rd-floor-canary-wharf",
+    image: "1.jpg",
+    // image: "/images/projects/comm/Notre/1.webp",
+    alt: "arbour Exchange Square 3rd Floor Canary Wharf",
+    home: true,
+    images_link: "Comm/3HX",
+    images: 33, // number of images Actual IMAGES 33
+    more: "",
+  },
   // #New  Centro Office Space, Guildford 36
   {
     id: 36,
@@ -916,7 +932,7 @@ export const PORTFOLIO = [
     images: 25, // number of images Actual IMAGES 25
     more: "",
   },
-  // #3 The Old School House 19
+  // #3 Harbour Exchange Square 5th Floor Canary Wharf 19
   {
     id: 19,
     title: "Harbour Exchange Square 5th Floor Canary Wharf",

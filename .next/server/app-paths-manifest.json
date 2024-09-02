@@ -1,21 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(Sections)/CallBack/page": "app/(Sections)/CallBack/page.js",
-  "/(Sections)/ContactUs/page": "app/(Sections)/ContactUs/page.js",
-  "/(Sections)/About/page": "app/(Sections)/About/page.js",
-  "/(Sections)/Projects/[slug]/[subslug]/page": "app/(Sections)/Projects/[slug]/[subslug]/page.js",
-  "/(Sections)/Projects/[slug]/page": "app/(Sections)/Projects/[slug]/page.js",
-  "/(Sections)/Services/[slug]/page": "app/(Sections)/Services/[slug]/page.js",
-  "/(Sections)/Team/page": "app/(Sections)/Team/page.js",
-  "/(Sections)/Terms/page": "app/(Sections)/Terms/page.js",
-  "/(Sections)/Cookies/page": "app/(Sections)/Cookies/page.js",
-  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
-  "/(Sections)/privacy-policy/page": "app/(Sections)/privacy-policy/page.js",
-  "/opengraph-image.jpg/route": "app/opengraph-image.jpg/route.js",
   "/page": "app/page.js",
-  "/robots.txt/route": "app/robots.txt/route.js",
-  "/icon.svg/route": "app/icon.svg/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/sitemap.xml/route": "app/sitemap.xml/route.js",
-  "/apple-icon.png/route": "app/apple-icon.png/route.js"
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(Sections)/About/page": "app/(Sections)/About/page.js",
+  "/(Sections)/ContactUs/page": "app/(Sections)/ContactUs/page.js"
 }
