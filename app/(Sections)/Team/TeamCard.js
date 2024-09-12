@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const TeamCard = ({ teamdata, category }) => {
   const filteredTeamData = teamdata.filter((article) =>
-    article.company.teamCategories.includes(category)
+    article.department.includes(category)
   );
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -59,7 +59,9 @@ const TeamCard = ({ teamdata, category }) => {
                     width={600}
                     height={600}
                     className="hover:grayscale-0 transition duration-300 ease-in-out rounded-lg object-cover sm:rounded-none sm:rounded-l-lg group-hover:scale-110 "
-                    src={item.image}
+                    src={
+                      item.image.startsWith("/") ? item.image : `/${item.image}`
+                    }
                     alt={`${item.name}'s picture.`}
                   />
                 </div>
@@ -79,11 +81,11 @@ const TeamCard = ({ teamdata, category }) => {
                   {item.firstName} {item.lastName}
                 </h3>
                 <span className="text-neutral-300">
-                  {item.company.department}
+                  {item.department}
                   <br />
                 </span>
                 <p className="mt-3 mb-4 font-light w-72 text-gray-500 dark:text-gray-400">
-                  {item.company.title}
+                  {item.designation}
                 </p>
               </div>
             </motion.div>

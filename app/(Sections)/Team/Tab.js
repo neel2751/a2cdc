@@ -1,15 +1,23 @@
 // components/TabbedCategories.js
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { animate, motion } from "framer-motion";
 import TeamCard from "./TeamCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTeamData } from "@/app/Store/slices/team";
 
 const Tab = ({ teamdata }) => {
+  const dispatch = useDispatch();
   const [activeCategory, setActiveCategory] = useState("");
+  const { data } = useSelector((state) => state.getTeams);
 
-  const uniqueAuthors = [
-    ...new Map(teamdata.map((v) => [v.company.teamCategories, v])).values(),
-  ];
+  useEffect(() => {
+    dispatch(fetchTeamData());
+  }, [dispatch]);
+  const categories =
+    data.length > 0
+      ? [...new Set(data.map((team) => team.department))]
+      : [...new Set(teamdata.map((team) => team.department))];
 
   return (
     <div className="container mx-auto mt-8">
@@ -62,17 +70,15 @@ const Tab = ({ teamdata }) => {
                     <span>ALL</span>
                   </div>
                 </button>
-                {uniqueAuthors.map((item, index) => (
+                {categories.map((item, index) => (
                   <motion.button
                     key={index}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() =>
-                      setActiveCategory(item.company.teamCategories)
-                    }
+                    onClick={() => setActiveCategory(item)}
                     aria-selected="true"
                     role="tab"
                     className={`px-4 py-2 rounded-[10px] text-sm font-normal ${
-                      activeCategory === item.company.teamCategories
+                      activeCategory === item
                         ? "bg-gradient-to-b from-neutral-700 via-neutral-800 to-neutral-950 text-white font-semibold"
                         : "bg-slate-200 text-gray-950 "
                     }`}
@@ -88,7 +94,7 @@ const Tab = ({ teamdata }) => {
                           initial={{ opacity: 0.6 }}
                           whileInView={{ opacity: 1 }}
                         >
-                          {item.company.teamCategories}
+                          {item}
                         </motion.span>
                       </div>
                     </div>
@@ -99,7 +105,10 @@ const Tab = ({ teamdata }) => {
           </div>
         </div>
       </div>
-      <TeamCard category={activeCategory} teamdata={teamdata} />
+      <TeamCard
+        category={activeCategory}
+        teamdata={data.length > 0 ? data : teamdata}
+      />
     </div>
   );
 };

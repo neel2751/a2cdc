@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 
@@ -31,6 +32,33 @@ const ProjectDetail = ({ data }) => {
         src={`${url}${data.images_link}/${i}.jpg`}
         alt={`${url}${data.images_link}/${i}.jpg`}
         key={i}
+        onError={() => {
+          this.setState({
+            images: images.map((img, index) => {
+              if (index === i - 1) {
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      background: `url(${toBase64(shimmer(800, 600))})`,
+                      backgroundSize: "100% 100%",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                      backgroundBlendMode: "multiply",
+                    }}
+                  />
+                );
+              } else {
+                return img;
+              }
+            }),
+          });
+        }}
         // placeholder="blur" // Optional blur-up while loading image
         // blurDataURL={`${url}${data.images_link}/${i}.jpg`}
         placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}

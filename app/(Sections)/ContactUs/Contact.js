@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ContactUs } from "@/app/data/data";
+import { contactUs } from "@/actions/contactAction";
+import toast, { Toaster } from "react-hot-toast";
 
 const Contact = () => {
   const initialFormData = {
@@ -59,33 +61,19 @@ const Contact = () => {
     if (isFormValid) {
       try {
         setLoading(true);
-        ("use server");
-        // Send form data to the server
-        const response = await axios.post("/api/ContactUs", data, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        setData(initialFormData);
-        //   console.log("check this email--->", response.data);
-        // console.log("chcek the response->", response.data);
-        if (response.data) {
-          // Handle success (optional)
-          //   console.log("Form submitted successfully!");
+        const response = await contactUs(data);
+        if (response.status === 200) {
           setData(initialFormData);
-          setMsg(true);
-        } else {
-          // Handle error (optional)
-          console.error("Error submitting form");
+          return toast.success(response.message);
         }
+        return toast.error(response.message);
       } catch (error) {
-        console.log("Mail Sent Failed", error.message);
+        toast.error("Somthing went wrong Please try again!");
       } finally {
-        console.log("Done Finally");
         setLoading(false);
       }
     } else {
-      console.warn("Please fill this form");
+      toast.error("Please fill this from");
     }
   };
   return (
@@ -484,6 +472,7 @@ const Contact = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </section>
+      <Toaster />
     </>
   );
 };
