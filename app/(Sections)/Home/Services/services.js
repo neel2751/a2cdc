@@ -4,8 +4,9 @@ import Link from "next/link";
 import SecondServices from "./secondServices";
 import { SUB_MENU } from "@/app/data/data";
 import { motion } from "framer-motion";
+import { memo } from "react";
 
-const ServiceCard = ({ image, name, description, link }) => {
+const ServiceCard = memo(({ image, name, description, link }) => {
   return (
     <motion.div
       whileHover={{ scale: [1, 1.05] }}
@@ -48,7 +49,7 @@ const ServiceCard = ({ image, name, description, link }) => {
       </Link>
     </motion.div>
   );
-};
+});
 
 const Services = () => {
   return (

@@ -1051,7 +1051,7 @@ export const PORTFOLIO = [
     // image: "/images/projects/comm/Notre/1.webp",
     alt: "notre-dame-house front image",
     home: false,
-    images_link: "Res/Upton_lane",
+    images_link: "Comm/Upton_lane",
     images: 5, // number of images Actual IMAGES 5
     more: "",
   },

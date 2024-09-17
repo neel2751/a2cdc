@@ -78,12 +78,7 @@ const test = ({ name }) => {
               width={800}
               height={400}
               //   src="/images/portfolio/Res/21Res.jpg"
-              src={
-                "https://cdcgrouplimited.com/nodejs/uploads/projects/" +
-                data.images_link +
-                "/" +
-                data.image
-              }
+              src={"/images/projects/" + data.images_link + "/" + data.image}
               alt={data.title} // alt text for image
               className="h-52 flex flex-col object-cover justify-center items-center bg-blue-600 rounded-t-xl overflow-clip group-hover:scale-105 transform-gpu transition duration-300 ease-in-out"
             />

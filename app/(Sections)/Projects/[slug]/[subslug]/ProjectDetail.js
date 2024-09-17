@@ -22,7 +22,7 @@ const ProjectDetail = ({ data }) => {
     typeof window === "undefined"
       ? Buffer.from(str).toString("base64")
       : window.btoa(str);
-  const url = "https://cdcgrouplimited.com/nodejs/uploads/projects/";
+  const url = "/images/projects/";
   for (let i = 1; i <= data.images; i++) {
     images.push(
       <Image
@@ -61,7 +61,7 @@ const ProjectDetail = ({ data }) => {
         }}
         // placeholder="blur" // Optional blur-up while loading image
         // blurDataURL={`${url}${data.images_link}/${i}.jpg`}
-        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(800, 600))}`}
       />
     );
   }

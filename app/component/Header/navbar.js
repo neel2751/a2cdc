@@ -114,7 +114,7 @@ const Navbar = () => {
             >
               <Image
                 src={cdc}
-                className="w-9/12"
+                className="w-full"
                 alt="Creative Design & Construction"
                 width={40}
                 height={40}
