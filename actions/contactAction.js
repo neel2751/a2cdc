@@ -45,8 +45,8 @@ async function sendMailHandler(email) {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.office365.com",
-      port: 587,
-      secure: false, // or 'STARTTLS'
+      port: process.env.SMTP_PORT || 587,
+      secure: process.env.SMTP_SECURE || false, // or 'STARTTLS'
       auth: {
         user: process.env.SMTP_USERNAME,
         pass: process.env.SMTP_PASSWORD,

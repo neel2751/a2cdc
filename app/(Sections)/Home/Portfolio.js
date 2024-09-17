@@ -60,7 +60,7 @@ const ProjectSlider = ({
   return (
     <Link
       className="sm:pb-8 pb-0 sm:px-8 overflow-hidden  isolate snap-center group shrink-0 relative w-96 sm:w-[500px] lg:w-[640px] h-auto bg-gray-50 rounded-2xl p-2 md:p-4 before:absolute before:inset-0 before:z-10 before:border before:border-gray-200 before:rounded-2xl before:transition before:hover:border-2 before:hover:border-blue-600 before:hover:shadow-lg"
-      href={`/Projects/${link}`}
+      href={`/Projects/${project}/${link}`}
       target="_blank"
       rel="noreferrer"
       aria-label={title}
