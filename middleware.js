@@ -2,41 +2,45 @@ import { NextResponse } from "next/server";
 import { decrypt } from "@/app/lib/session";
 import { cookies } from "next/headers";
 
-// 1. Specify protected routes
 const protectedRoutes = ["/DashBoard"];
+const loggedErrors = new Set(); // Store error identifiers to avoid duplicate logging
 
 export default async function middleware(req) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
 
-  const cookie = cookies().get("session")?.value;
-  const session = await decrypt(cookie);
+  if (isProtectedRoute) {
+    const cookie = cookies().get("session")?.value;
+    let session = null;
 
-  // If the user is authenticated and tries to access the login page, redirect to /DashBoard
-  if (session?.userId && path === "/Admin") {
-    return NextResponse.redirect(new URL("/DashBoard", req.nextUrl));
+    try {
+      session = await decrypt(cookie);
+    } catch (error) {
+      // Generate a unique identifier for the error (e.g., based on the error message)
+      const errorId = error.message; // Simplified, you might want to use a more robust identifier
+
+      if (!loggedErrors.has(errorId)) {
+        console.error("Failed to verify session:", error.message);
+        loggedErrors.add(errorId); // Add the error to the set to avoid duplicate logging
+      }
+    }
+
+    if (session?.userId && path === "/Admin") {
+      return NextResponse.redirect(new URL("/DashBoard", req.nextUrl));
+    }
+
+    if (session?.userId && isProtectedRoute) {
+      return NextResponse.next();
+    }
+
+    if (!session?.userId && isProtectedRoute) {
+      return NextResponse.redirect(new URL("/Admin", req.nextUrl));
+    }
   }
 
-  // If the user is authenticated and tries to access a protected route, allow access
-  if (session?.userId && isProtectedRoute) {
-    return NextResponse.next();
-  }
-
-  // If the user is not authenticated and tries to access a protected route, redirect to login
-  if (!session?.userId && isProtectedRoute) {
-    return NextResponse.redirect(new URL("/Admin", req.nextUrl));
-  }
-
-  // If the user is authenticated and tries to access a non-protected route, allow access
-  if (session?.userId && !isProtectedRoute) {
-    return NextResponse.next();
-  }
-
-  // If the user is not authenticated and accessing a non-protected route, allow access
   return NextResponse.next();
 }
 
-// Routes Middleware should not run on
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };

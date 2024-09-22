@@ -1396,7 +1396,7 @@ export const TEAMDATA = [
     lastName: "Bhuiyan",
     description:
       "Mr. Mohammad Bhuiyan serves as the Chief Executive Officer (CEO) of the Creative Design & Construction Limited (CDC) based in the UK, overseeing the overall strategic direction and management of the organization. In his role, he is responsible for setting goals, formulating policies, and ensuring the efficient operation of the company. Additionally, as the CDM (Construction Design and Management) Coordinator, Mr. Bhuiyan plays a crucial role in ensuring compliance with health and safety regulations throughout the construction projects. He works closely with design and construction teams to integrate safety considerations into the project planning and execution. Overall, Mr Mohammad Bhuiyan's dual role as CEO and CDM Coordinator reflects his commitment to both the business success and the safety of construction projects under his leadership.",
-    image: "https://cdcdevelopment.co.uk/images/team/Dullah.jpg",
+    image: "/images/team/Mohammad.jpg",
     designation: "CEO  & CDM Co-ordinator",
     department: "Leadership",
   },
@@ -1406,7 +1406,7 @@ export const TEAMDATA = [
     lastName: "Alam",
     description:
       "Md Sadequl Alam serves as the Director and Civil Engineer at Creative Design & Construction Limited, bringing a wealth of knowledge and extensive experience to the company's leadership. In his role as Director, he is responsible for shaping the strategic vision and overseeing the overall management of the company. As a Civil Engineer, Mr. Alam applies his expertise to ensure the successful planning and execution of construction projects. His profound knowledge of the construction industry and property business contributes to the company's competitiveness and success. Being a well-known and respected figure in the local community, Mr. Alam enhances the company's profile and fosters positive relationships within the community.",
-    image: "https://cdcdevelopment.co.uk/images/team/Sadequl.jpg",
+    image: "/images/team/Md Sadequl.jpg",
     designation: "Director",
     department: "Leadership",
   },
@@ -1416,7 +1416,7 @@ export const TEAMDATA = [
     lastName: "Nitu",
     description:
       "Najia Nitu plays a pivotal role as the Director and Consultant of Interior Design at Creative Design & Construction Limited. In her capacity as Director, she contributes to the overall strategic direction of the company, ensuring a seamless integration of interior design concepts into construction projects. As a Consultant of Interior Design, Najia Nitu brings her creative expertise to enhance the aesthetic appeal and functionality of spaces within the projects. Her innovative design solutions not only meet client expectations but also elevate the company's reputation in the competitive market. Ms. Nitu's leadership in interior design adds a unique dimension to Creative Design & Construction Limited's capabilities, making her a key contributor to the company's success.",
-    image: "https://cdcdevelopment.co.uk/images/team/Nitu.jpg",
+    image: "/images/team/Najia.jpg",
     designation: "Director",
     department: "Leadership",
   },
@@ -1427,7 +1427,7 @@ export const TEAMDATA = [
     lastName: "Rahman",
     description:
       "As the Head of Design & BIM (Building Information Modeling) at Creative Design & Construction Limited, Mobinur Rahman assumes a crucial role in shaping the architectural vision of the company. Leveraging his extensive experience in architectural design and consultation, Mr. Rahman leads the design team in creating innovative and functional spaces for construction projects. His expertise extends to integrating BIM technology and enhancing efficiency in project planning and execution. As one of the key figures in the company, Mobinur Rahman actively contributes to maintaining high standards of design excellence, ensuring that projects align with client expectations and industry regulations. His leadership plays a vital role in positioning Creative Design & Construction Limited as a leader in architectural innovation and design efficiency.",
-    image: "https://cdcdevelopment.co.uk/images/team/Mobin.jpg",
+    image: "/images/team/Mobinur.jpg",
     designation: "Head of Building Information Modelling & Design",
     department: "Architectural",
   },

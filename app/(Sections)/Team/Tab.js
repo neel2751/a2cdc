@@ -15,7 +15,7 @@ const Tab = ({ teamdata }) => {
     dispatch(fetchTeamData());
   }, [dispatch]);
   const categories =
-    data.length > 0
+    data?.length > 0
       ? [...new Set(data.map((team) => team.department))]
       : [...new Set(teamdata.map((team) => team.department))];
 
@@ -107,7 +107,7 @@ const Tab = ({ teamdata }) => {
       </div>
       <TeamCard
         category={activeCategory}
-        teamdata={data.length > 0 ? data : teamdata}
+        teamdata={data?.length > 0 ? data : teamdata}
       />
     </div>
   );

@@ -34,6 +34,7 @@ export async function Login(email, password) {
     if (!isValidPassword) {
       return { error: "Invalid password" };
     }
+    // return;
     await createSession(result[0].id);
     redirect("/DashBoard");
     return result;

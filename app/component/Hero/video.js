@@ -1,10 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 
-const Video = () => {
+const Video = memo(() => {
   return (
     <video
       className="rounded-2xl"
-      autobuffer="autobuffer"
       autoPlay={true}
       muted
       loop
@@ -24,6 +23,6 @@ const Video = () => {
       Your browser does not support the video tag.
     </video>
   );
-};
+});
 
 export default Video;

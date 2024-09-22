@@ -2,11 +2,11 @@
 import { PORTFOLIO } from "@/app/data/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation"; // usePathname, useSearchParams, useRouter
 import PaginationHelper from "@/app/Helper/PaginationHelper";
 
-const test = ({ name }) => {
+const test = memo(({ name }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -110,6 +110,6 @@ const test = ({ name }) => {
     </div>
     // <!-- End Card Blog -->
   );
-};
+});
 
 export default test;

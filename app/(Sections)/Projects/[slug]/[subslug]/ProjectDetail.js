@@ -1,149 +1,96 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const ProjectDetail = ({ data }) => {
-  const images = [];
+  const [brokenImages, setBrokenImages] = useState({});
+
+  // Shimmer effect for placeholder
   const shimmer = (w, h) => `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <linearGradient id="g">
-      <stop stop-color="#333" offset="20%" />
-      <stop stop-color="#222" offset="50%" />
-      <stop stop-color="#333" offset="70%" />
-    </linearGradient>
-  </defs>
-  <rect width="${w}" height="${h}" fill="#333" />
-  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-</svg>`;
+    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <linearGradient id="g">
+          <stop stop-color="#333" offset="20%" />
+          <stop stop-color="#222" offset="50%" />
+          <stop stop-color="#333" offset="70%" />
+        </linearGradient>
+      </defs>
+      <rect width="${w}" height="${h}" fill="#333" />
+      <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+      <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+    </svg>`;
 
   const toBase64 = (str) =>
     typeof window === "undefined"
       ? Buffer.from(str).toString("base64")
       : window.btoa(str);
+
   const url = "/images/projects/";
+  const fallbackImage = "/images/fallback.jpg"; // A fallback image path
+  const maxRetries = 3; // Maximum number of retry attempts
+
+  // Handle image load error with retry mechanism
+  const handleImageError = (index) => {
+    setBrokenImages((prevBrokenImages) => {
+      const retries = prevBrokenImages[index]?.retries || 0;
+
+      // If retries are less than max, retry loading after a short delay
+      if (retries < maxRetries) {
+        setTimeout(() => {
+          setBrokenImages((prevState) => ({
+            ...prevState,
+            [index]: { retries: retries + 1, isBroken: false },
+          }));
+        }, 1000); // Retry after 1 second
+      } else {
+        // If max retries reached, mark image as broken
+        return {
+          ...prevBrokenImages,
+          [index]: { retries, isBroken: true },
+        };
+      }
+
+      return prevBrokenImages;
+    });
+  };
+
+  const images = [];
   for (let i = 1; i <= data.images; i++) {
+    const isBroken = brokenImages[i]?.isBroken;
+
     images.push(
       <Image
         className="rounded-xl"
         width={800}
         height={600}
-        src={`${url}${data.images_link}/${i}.jpg`}
-        alt={`${url}${data.images_link}/${i}.jpg`}
+        src={isBroken ? fallbackImage : `${url}${data.images_link}/${i}.jpg`}
+        alt={`Project Image ${i}`}
         key={i}
-        onError={() => {
-          this.setState({
-            images: images.map((img, index) => {
-              if (index === i - 1) {
-                return (
-                  <div
-                    key={index}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      background: `url(${toBase64(shimmer(800, 600))})`,
-                      backgroundSize: "100% 100%",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center",
-                      backgroundBlendMode: "multiply",
-                    }}
-                  />
-                );
-              } else {
-                return img;
-              }
-            }),
-          });
-        }}
-        // placeholder="blur" // Optional blur-up while loading image
-        // blurDataURL={`${url}${data.images_link}/${i}.jpg`}
+        onError={() => handleImageError(i)} // Retry loading if error
         placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(800, 600))}`}
       />
     );
   }
+
   return (
     <>
-      {/* <div className="p-10">
-        <h2 className="text-2xl font-bold text-gray-900">{data.title}</h2>
-        <p className="mt-2 text-lg leading-8 text-gray-500">
-          {data.description}
-        </p>
-        {data.images.length > 2 ? (
-          <div className="grid grid-cols-4 grid-rows-4 h-96 gap-4">
-            <div className=" lg:col-span-2 lg:row-span-4 col-span-6 row-span-2">
-              <img
-                className=" h-full w-full object-cover rounded-2xl drop-shadow-md border border-slate-600"
-                src={data.image}
-                alt="test"
-              />
-            </div>
-            <div className="lg:col-span-2 lg:row-span-2 col-span-2 row-span-1">
-              <img
-                className=" rounded-2xl h-full w-full object-cover border drop-shadow-md border-slate-600"
-                src={data.images[0].image}
-                alt="test"
-              />
-            </div>
-            <div className="lg:col-span-1 lg:row-span-2 col-span-2 row-span-1">
-              <img
-                className=" rounded-2xl h-full w-full object-cover border drop-shadow-md border-slate-600"
-                src={data.images[1].image}
-                alt="test"
-              />
-            </div>
-            <div className="lg:col-span-1 lg:row-span-2 col-span-2 row-span-1">
-              <img
-                className="rounded-2xl h-full w-full object-cover border  drop-shadow-md border-slate-600"
-                src={data.images[2].image}
-                alt="test"
-              />
-            </div>
-          </div>
-        ) : (
-          <div className=" isolate relative">
-            <div className="xl:max-w-7xl mt-4 overflow-hidden lg:shadow-card">
-              <img
-                className="inset-0 -z-10 rounded-3xl object-cover w-full aspect-[5/2]"
-                src={data.images[0].image}
-              />
-            </div>
-          </div>
-          // <div className=" max-w-7xl rounded-2xl aspect-[5/2.3] overflow-hidden ">
-          //   <img
-          //     src={data.images[0].image}
-          //     alt="product image"
-          //     className="rounded-t-lg w-full h-auto"
-          //   />
-          // </div>
-        )}
-      </div> */}
-      {/* <!-- Blog Article --> */}
       <div className="max-w-7xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-7xl mx-auto">
-          {/* <!-- Content --> */}
           <div className="space-y-5 md:space-y-8">
             <div className="space-y-3 max-w-3xl">
               <h2 className="text-2xl font-semibold md:text-3xl">
                 {data.title}
               </h2>
-
-              <p className="text-lg text-gray-800 ">{data.description}</p>
+              <p className="text-lg text-gray-800">{data.description}</p>
             </div>
-            {/*  put loader for image loading using the shimmer effect of images */}
             <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
               {images}
             </div>
           </div>
-          {/* <!-- End Content --> */}
         </div>
       </div>
     </>
   );
-  //   return <div>ProjectDetail {data}</div>;
 };
 
 export default ProjectDetail;

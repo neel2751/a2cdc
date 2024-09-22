@@ -20,7 +20,11 @@ export async function decrypt(session) {
     });
     return payload;
   } catch (error) {
-    console.log("Failed to verify session");
+    console.error("Failed to verify session:", error.message);
+    // Handle the error appropriately
+    return null; //
+    return { error: "Invalid session" };
+    console.log("Failed to verify session test");
   }
 }
 
