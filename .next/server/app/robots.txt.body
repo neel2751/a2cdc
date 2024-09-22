@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /Admin/
+
+Sitemap: http://cdc.construction/sitemap.xml
