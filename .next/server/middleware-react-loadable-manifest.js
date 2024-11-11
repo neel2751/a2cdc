@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"app/(Sections)/Projects/[slug]/[subslug]/ProjectDetail.js -> ./ImageList":{"id":9598,"files":["static/chunks/598.b9787409c7c98d03.js"]}}';
