@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // output: "export",
   images: {
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdc.construction",
+      },
       {
         protocol: "https",
         hostname: "cdcgrouplimited.com",

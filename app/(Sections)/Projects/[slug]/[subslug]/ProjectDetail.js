@@ -1,96 +1,68 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
+import React, { memo } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+// import { ImageList } from "./ImageList";
 
-const ProjectDetail = ({ data }) => {
-  const [brokenImages, setBrokenImages] = useState({});
+// Dynamically import the ImageList component
+const ImageList = dynamic(() => import("./ImageList"), {
+  ssr: false,
+});
 
-  // Shimmer effect for placeholder
-  const shimmer = (w, h) => `
-    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <defs>
-        <linearGradient id="g">
-          <stop stop-color="#333" offset="20%" />
-          <stop stop-color="#222" offset="50%" />
-          <stop stop-color="#333" offset="70%" />
-        </linearGradient>
-      </defs>
-      <rect width="${w}" height="${h}" fill="#333" />
-      <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-      <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-    </svg>`;
-
-  const toBase64 = (str) =>
-    typeof window === "undefined"
-      ? Buffer.from(str).toString("base64")
-      : window.btoa(str);
-
-  const url = "/images/projects/";
-  const fallbackImage = "/images/fallback.jpg"; // A fallback image path
-  const maxRetries = 3; // Maximum number of retry attempts
-
-  // Handle image load error with retry mechanism
-  const handleImageError = (index) => {
-    setBrokenImages((prevBrokenImages) => {
-      const retries = prevBrokenImages[index]?.retries || 0;
-
-      // If retries are less than max, retry loading after a short delay
-      if (retries < maxRetries) {
-        setTimeout(() => {
-          setBrokenImages((prevState) => ({
-            ...prevState,
-            [index]: { retries: retries + 1, isBroken: false },
-          }));
-        }, 1000); // Retry after 1 second
-      } else {
-        // If max retries reached, mark image as broken
-        return {
-          ...prevBrokenImages,
-          [index]: { retries, isBroken: true },
-        };
-      }
-
-      return prevBrokenImages;
-    });
-  };
-
-  const images = [];
-  for (let i = 1; i <= data.images; i++) {
-    const isBroken = brokenImages[i]?.isBroken;
-
-    images.push(
-      <Image
-        className="rounded-xl"
-        width={800}
-        height={600}
-        src={isBroken ? fallbackImage : `${url}${data.images_link}/${i}.jpg`}
-        alt={`Project Image ${i}`}
-        key={i}
-        onError={() => handleImageError(i)} // Retry loading if error
-        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(800, 600))}`}
-      />
-    );
-  }
-
+const ProjectDetail = memo(function ProjectDetail({ data }) {
   return (
     <>
       <div className="max-w-7xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
         <div className="max-w-7xl mx-auto">
           <div className="space-y-5 md:space-y-8">
+            {/* Previous Link Back Link */}
+            <Link
+              href={`/Projects/${data?.project}`}
+              className="text-xs text-neutral-600 flex items-center gap-2 group transition duration-700 ease-in-out underline"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className=" group-hover:block hidden size-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4 group-hover:hidden block"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5 8.25 12l7.5-7.5"
+                />
+              </svg>
+              Back to Projects
+            </Link>
             <div className="space-y-3 max-w-3xl">
-              <h2 className="text-2xl font-semibold md:text-3xl">
-                {data.title}
+              <h2 className="text-xl font-semibold md:text-xl">
+                {data?.title}
               </h2>
-              <p className="text-lg text-gray-800">{data.description}</p>
+              <p className="text-lg text-gray-800">{data?.description}</p>
             </div>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
-              {images}
-            </div>
+            {/* Render the virtualized image list */}
+            <ImageList imagesLink={data.images} imagesUrl={data.images_link} />
           </div>
         </div>
       </div>
     </>
   );
-};
+});
 
 export default ProjectDetail;

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, memo, useContext, useState } from "react";
 import { SUB_MENU, PROJECT } from "../../data/data.js";
 import Image from "next/image";
 import Link from "next/link.js";
@@ -7,18 +7,22 @@ import Link from "next/link.js";
 const HoverContext = createContext();
 
 const SubMenu = ({ children }) => {
-  const [hover, subHover] = useState(SUB_MENU[0].id);
-  const [name, subName] = useState(SUB_MENU[0].name);
-  const [desc, subDesc] = useState(SUB_MENU[0].description);
-  const [img, subImg] = useState(SUB_MENU[0].image);
-  const [link, subLink] = useState(SUB_MENU[0].link);
+  const [hoverData, setHoverData] = useState({
+    id: SUB_MENU[0].id,
+    serName: SUB_MENU[0].name,
+    desc: SUB_MENU[0].description,
+    img: SUB_MENU[0].image,
+    serLink: SUB_MENU[0].link,
+  });
 
   const handleClick = (item) => {
-    subHover(item.id);
-    subName(item.name);
-    subDesc(item.description);
-    subImg(item.image);
-    subLink(item.link);
+    setHoverData({
+      id: item.id,
+      serName: item.name,
+      desc: item.description,
+      img: item.image,
+      serLink: item.link,
+    });
   };
 
   const groupA = SUB_MENU.filter((item) => item.category === "A");
@@ -75,9 +79,7 @@ const SubMenu = ({ children }) => {
 
   return (
     <>
-      <HoverContext.Provider
-        value={{ jsxDataA, jsxDataB, name, desc, img, link, hover }}
-      >
+      <HoverContext.Provider value={{ jsxDataA, jsxDataB, hoverData }}>
         {children}
       </HoverContext.Provider>
     </>
@@ -92,7 +94,7 @@ const HoverImageContext = () => {
   return context;
 };
 
-const Projects = ({ path }) => {
+const Projects = memo(function Projects({ path }) {
   return (
     <>
       {PROJECT.map((item) => (
@@ -179,6 +181,6 @@ const Projects = ({ path }) => {
       ))}
     </>
   );
-};
+});
 
 export { SubMenu, Projects, HoverImageContext };

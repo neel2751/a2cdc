@@ -6,7 +6,12 @@ import { SUB_MENU } from "@/app/data/data";
 import { motion } from "framer-motion";
 import { memo } from "react";
 
-const ServiceCard = memo(({ image, name, description, link }) => {
+const ServiceCard = memo(function ServiceCard({
+  image,
+  name,
+  description,
+  link,
+}) {
   return (
     <motion.div
       whileHover={{ scale: [1, 1.05] }}
@@ -69,9 +74,6 @@ const Services = () => {
           {SUB_MENU.filter((order) => order.tag === "Y").map((ser) => (
             <ServiceCard key={ser.id} {...ser} />
           ))}
-          {/* {SUB_MENU.slice(0, 6).map((ser) => (
-            <BlogCard key={ser.id} {...ser} />
-          ))} */}
         </div>
         <SecondServices />
       </div>

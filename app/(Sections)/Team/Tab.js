@@ -1,7 +1,7 @@
 // components/TabbedCategories.js
 "use client";
 import React, { useState, useEffect } from "react";
-import { animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import TeamCard from "./TeamCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeamData } from "@/app/Store/slices/team";
@@ -35,7 +35,6 @@ const Tab = ({ teamdata }) => {
                   className="h-full w-1/2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600"
                 />
                 <button
-                  whileTap={{ scale: 0.9 }}
                   className={`px-4 py-2 rounded-[10px] text-sm ${
                     activeCategory === ""
                       ? "bg-gradient-to-b from-neutral-800 via-neutral-900/90 to-neutral-950 text-white font-semibold"

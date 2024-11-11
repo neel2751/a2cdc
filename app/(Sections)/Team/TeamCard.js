@@ -1,44 +1,12 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const TeamCard = ({ teamdata, category }) => {
+const TeamCard = memo(function TeamCard({ teamdata, category }) {
   const filteredTeamData = teamdata.filter((article) =>
     article.department.includes(category)
   );
-
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const trigger = useRef(null);
-  const modal = useRef(null);
-
-  // close on click outside
-  useEffect(() => {
-    const clickHandler = ({ target }) => {
-      if (!modal.current) return;
-      if (
-        !modalOpen ||
-        modal.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
-      setModalOpen(false);
-    };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
-  });
-
-  // close if the esc key is pressed
-  useEffect(() => {
-    const keyHandler = ({ keyCode }) => {
-      if (!modalOpen || keyCode !== 27) return;
-      setModalOpen(false);
-    };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
-  });
-
   return (
     <>
       <div
@@ -49,30 +17,33 @@ const TeamCard = ({ teamdata, category }) => {
             <motion.div
               layoutId={item.id}
               key={item.id}
-              ref={trigger}
               // onClick={() => openModel(item)}
               className="items-center bg-gradient-to-b from-neutral-800 via-neutral-900 to-neutral-950 rounded-lg hover:cursor-pointer shadow sm:flex group overflow-clip"
             >
               {item.image ? (
                 <div className="aspect-w-16 aspect-h-8 overflow-hidden">
                   <Image
-                    width={600}
-                    height={600}
+                    width={700}
+                    height={500}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
                     className="hover:grayscale-0 transition duration-300 ease-in-out rounded-lg object-cover sm:rounded-none sm:rounded-l-lg group-hover:scale-110 "
                     src={
-                      item.image.startsWith("/") ? item.image : `/${item.image}`
+                      item.image.startsWith("/") ? item.image : `${item.image}`
                     }
-                    alt={`${item.name}'s picture.`}
+                    alt={`${item.firstName} ${item.lastName}'s picture`}
                   />
                 </div>
               ) : (
                 <div className="bg-white h-[272px] flex justify-center transition items-center rounded-lg object-cover p-2 sm:rounded-none sm:rounded-l-lg ">
                   <Image
-                    width={600}
-                    height={600}
+                    width={700}
+                    height={500}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
                     src={"/images/Logo_New.svg"}
                     className="w-full object-cover sm:size-48 lg:size-60 mx-auto"
-                    alt={`${item.name}'s picture`}
+                    alt={`${item.firstName} ${item.lastName}'s picture`}
                   />
                 </div>
               )}
@@ -80,10 +51,10 @@ const TeamCard = ({ teamdata, category }) => {
                 <h3 className="text-xl font-bold tracking-tight text-white">
                   {item.firstName} {item.lastName}
                 </h3>
-                <span className="text-neutral-300">
+                {/* <span className="text-neutral-300">
                   {item.department}
                   <br />
-                </span>
+                </span> */}
                 <p className="mt-3 mb-4 font-light w-72 text-gray-500 dark:text-gray-400">
                   {item.designation}
                 </p>
@@ -94,6 +65,6 @@ const TeamCard = ({ teamdata, category }) => {
       </div>
     </>
   );
-};
+});
 
 export default TeamCard;

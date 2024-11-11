@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-// import cdc from "../../../public/images/Logo_New.svg";
-import cdc from "@/public/images/CDC_LOGO.svg";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Projects, HoverImageContext } from "./submenu";
@@ -10,7 +8,7 @@ import Social from "../Social";
 
 const Navbar = () => {
   //active link change text colour
-  const { jsxDataA, jsxDataB, name, desc, img, link } = HoverImageContext();
+  const { jsxDataA, jsxDataB, hoverData } = HoverImageContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isProject, setIsProject] = useState(false);
   const [navIsOpened, setNavIsOpened] = useState(false);
@@ -113,7 +111,7 @@ const Navbar = () => {
               className="text-xl font-semibold w-4/12 flex items-center gap-x-2"
             >
               <Image
-                src={cdc}
+                src={"https://cdc.construction/images/CDC_LOGO.svg"}
                 className="w-full"
                 alt="Creative Design & Construction"
                 width={40}
@@ -136,7 +134,7 @@ const Navbar = () => {
                   href="/"
                   className={`${
                     pathname === "/" ? "text-[#007dff]" : "text-[#27272a]"
-                  } relative py-2.5 text-base duration-300 font-semibold ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
+                  } relative py-2.5 text-base duration-300 font-medium ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
                 >
                   Home
                 </Link>
@@ -146,7 +144,7 @@ const Navbar = () => {
                   href="/About"
                   className={`${
                     pathname === "/About" ? "text-[#007dff]" : "text-[#27272a]"
-                  } relative py-2.5 text-base duration-300 font-semibold ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
+                  } relative py-2.5 text-base duration-300 font-medium ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
                 >
                   About
                 </Link>
@@ -160,7 +158,7 @@ const Navbar = () => {
                   <button
                     // href="/Services"
                     // pathname.split("/")[1] === "Services" ? "text-[#007dff]" : "text-[#27272a]""
-                    className={`flex items-center relative py-2.5 text-base duration-300 font-semibold ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff] ${
+                    className={`flex items-center relative py-2.5 text-base duration-300 font-medium ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff] ${
                       isOpen
                         ? "after:absolute after:w-full after:bg-white after:scale-100"
                         : ""
@@ -209,14 +207,14 @@ const Navbar = () => {
                       </div>
                       <div className="flex flex-col pt-4 md:pt-0 mx-1 md:mx-0">
                         <span className="text-sm font-semibold uppercase text-[#242A3D]">
-                          {name}
+                          {hoverData.serName}
                         </span>
                         <Link
                           className="group mt-2 p-3 flex gap-x-5 items-center rounded-xl hover:bg-gray-100 dark:hover:bg-slate-500/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-slate-600"
-                          href={`Services/Service/${link}`}
+                          href={`Services/Service/${hoverData.serLink}`}
                         >
                           <Image
-                            src={img}
+                            src={hoverData.img}
                             alt="Image Description"
                             height={1500}
                             width={1000}
@@ -225,7 +223,7 @@ const Navbar = () => {
                         </Link>
                         <div className="grow pt-4 md:pt-0 mx-1 md:mx-0">
                           <p className="text-sm text-gray-800 dark:text-slate-400">
-                            {desc}
+                            {hoverData.desc}
                           </p>
                         </div>
                       </div>
@@ -248,7 +246,7 @@ const Navbar = () => {
                         ? "text-[#007dff]"
                         : "text-[#27272a]"
                     }
-                    flex items-center relative py-2.5 text-base duration-300 font-semibold  ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
+                    flex items-center relative py-2.5 text-base duration-300 font-medium  ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
                   >
                     Portfolio
                     <svg
@@ -287,7 +285,7 @@ const Navbar = () => {
                   href="/Team"
                   className={`${
                     pathname === "/Team" ? "text-[#007dff]" : "text-[#27272a]"
-                  } relative py-2.5 text-base duration-300 font-semibold ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
+                  } relative py-2.5 text-base duration-300 font-medium ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
                 >
                   Team
                 </Link>
@@ -299,7 +297,7 @@ const Navbar = () => {
                     pathname === "/ContactUs"
                       ? "text-[#007dff]"
                       : "text-[#27272a]"
-                  } relative py-2.5 text-base duration-300 font-semibold ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
+                  } relative py-2.5 text-base duration-300 font-medium ease-linear hover:text-[#007dff] after:absolute after:w-full after:left-0 after:bottom-0 after:h-px after:rounded-md after:origin-left after:ease-linear after:duration-300 after:scale-x-0 hover:after:scale-100 after:bg-[#007dff]`}
                 >
                   Contact Us
                 </Link>
@@ -308,7 +306,7 @@ const Navbar = () => {
             <div className="flex sm:items-center lg:min-w-max mt-10 lg:mt-0">
               <Link
                 href="/ContactUs"
-                className="px-6 items-center h-12 rounded-3xl text-sm font-semibold text-white bg-gradient-to-tr from-[#0063ff] via-[#004cb1] to-[#871518] duration-300 ease-linear flex justify-center w-full sm:w-auto"
+                className="px-6 items-center h-12 rounded-3xl text-sm font-semibold text-white bg-gradient-to-tr from-[#0063ff] via-[#004cb1] via-30% to-[#871518] duration-300 ease-linear flex justify-center w-full sm:w-auto"
               >
                 {/* Marquee */}
                 <div className="text inline-flex overflow-hidden whitespace-nowrap">

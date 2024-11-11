@@ -13,7 +13,7 @@ const CTA = ({ title, subTitle, imgSrc, btnName, btnLink }) => {
                 className="h-full w-full object-cover rounded-md"
                 // priority
                 loading="lazy"
-                src={CTAImage}
+                src={"https://cdc.construction/images/CTA.svg"}
                 alt="Call To Action Background Image"
                 height={500}
                 width={500}

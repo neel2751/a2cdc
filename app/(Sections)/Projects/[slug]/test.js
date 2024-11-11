@@ -6,7 +6,7 @@ import { memo, useCallback, useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation"; // usePathname, useSearchParams, useRouter
 import PaginationHelper from "@/app/Helper/PaginationHelper";
 
-const test = memo(({ name }) => {
+const Project = memo(function Project({ name }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -43,7 +43,7 @@ const test = memo(({ name }) => {
       setCurrentPage(1); // update the page number in state
       router.push(pathname + "?" + createQueryString("page", 1)); // redirect to the first page
     }
-  }, [currentPage]);
+  }, [currentPage, lastPage, createQueryString, pathname, router, searchParams]);
 
   const onPageChange = (page) => {
     if (page > lastPage) {
@@ -72,21 +72,26 @@ const test = memo(({ name }) => {
           <Link
             href={`/Projects/${name}/${data.link}`}
             key={data.id}
-            className="group flex flex-col h-full bg-white border overflow-hidden border-gray-200 shadow-sm rounded-xl dark:border-gray-700 dark:shadow-slate-700/[.7] hover:shadow-lg hover:border-[#007dff]"
+            className="group flex flex-col h-full bg-white border overflow-hidden border-gray-400 shadow-sm rounded-md hover:shadow-lg hover:border-[#007dff]"
           >
             <Image
               width={800}
               height={400}
               //   src="/images/portfolio/Res/21Res.jpg"
-              src={"/images/projects/" + data.images_link + "/" + data.image}
+              src={
+                "https://cdc.construction/images/projects/" +
+                data.images_link +
+                "/" +
+                data.image
+              }
               alt={data.title} // alt text for image
-              className="h-52 flex flex-col object-cover justify-center items-center bg-blue-600 rounded-t-xl overflow-clip group-hover:scale-105 transform-gpu transition duration-300 ease-in-out"
+              className="h-52 flex flex-col object-cover justify-center items-center bg-blue-600 rounded-t-md overflow-clip group-hover:scale-105 transform-gpu transition duration-300 ease-in-out"
             />
             <div className="p-4 md:p-6">
-              <span className="block mb-1 text-xs font-semibold uppercase text-blue-600 group-hover:text-neutral-800">
+              {/* <span className="block mb-1 text-xs font-semibold uppercase text-blue-600 group-hover:text-neutral-800">
                 {data.project}
-              </span>
-              <h3 className="text-lg font-semibold tracking-tight text-gray-800 group-hover:text-[#0053e3]">
+              </span> */}
+              <h3 className="text-lg font-medium text-gray-800 group-hover:text-[#0053e3]">
                 {/* 21 Gaysham Avenue, Ilford */}
                 {data.title}
               </h3>
@@ -112,4 +117,4 @@ const test = memo(({ name }) => {
   );
 });
 
-export default test;
+export default Project;

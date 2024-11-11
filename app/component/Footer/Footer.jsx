@@ -11,7 +11,6 @@ import { useState } from "react";
 import Social from "@/app/component/Social";
 
 const Footer = () => {
- 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(false);
   const handleNewLetter = async (e) => {
@@ -49,12 +48,12 @@ const Footer = () => {
                 aria-label="Brand"
               >
                 <Image
-                src={CDCLogo}
-                className="!w-20 h-auto py-2"
-                alt="Creative Design & Construction"
-                width={40}
-                height={40}
-              />
+                  src={CDCLogo}
+                  className="!w-20 h-auto py-2"
+                  alt="Creative Design & Construction"
+                  width={40}
+                  height={40}
+                />
               </Link>
               <Link
                 className="group"
@@ -330,7 +329,7 @@ const Footer = () => {
                     <Image
                       width={40}
                       height={40}
-                      src={"/images/Logo_New.svg"}
+                      src={CDCLogo}
                       alt="Creative Design & Construction"
                     />
                   </a>
@@ -354,14 +353,14 @@ const Footer = () => {
 
 export default Footer;
 
-const LogoItem = ({ logoImg, name }) => {
+const LogoItem = ({ logoImg }) => {
   return (
     <div className="p-4 sm:p-5 hover:cursor-pointer group">
       <Image
         src={logoImg.mainImageUrl}
         width={200}
         height={160}
-        alt={"company name"}
+        alt={logoImg.alt}
         className="h-20 w-auto ease-linear duration-300 group-hover:!grayscale-0 group-hover:scale-105"
       />
     </div>
@@ -373,7 +372,7 @@ const LogoCloudSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-center">
           {LOGOS.map((logo) => (
-            <LogoItem key={logo.id} logoImg={...logo}/>
+            <LogoItem key={logo.id} logoImg={logo} />
           ))}
         </div>
       </div>

@@ -5,6 +5,7 @@ import Detail from "./Detail";
 import Footer from "@/app/component/Footer/Footer";
 import NotFound from "@/app/not-found";
 import CTA from "@/app/component/CTA/CTA";
+import { Suspense } from "react";
 
 // Generate A Meta data
 export async function generateMetadata({ params }, parent) {
@@ -66,7 +67,13 @@ export default function Page({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {check.length === 0 ? <NotFound /> : <Detail slug={check[0]} />}
+      {check.length === 0 ? (
+        <NotFound />
+      ) : (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Detail slug={check[0]} />
+        </Suspense>
+      )}
       <CTA />
       <Footer />
     </>

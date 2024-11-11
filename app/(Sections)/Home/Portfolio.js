@@ -5,11 +5,7 @@ import Link from "next/link";
 import Loading from "./loading";
 
 const Portfolio = () => {
-  return (
-    <>
-      <Test />
-    </>
-  );
+  return <Test />;
 };
 
 const Test = () => {
@@ -24,7 +20,7 @@ const Test = () => {
                 Remarkable Project
               </p>
               <h2 className="sm:text-5xl text-neutral-900 tracking-tight font-bold text-4xl mt-2">
-                Our Leatest Project
+                Our Latest Project
               </h2>
               <p className="text-neutral-600 font-medium tracking-tight text-lg mt-4">
                 Explore our extensive portfolio showcasing the breadth of our
@@ -38,11 +34,11 @@ const Test = () => {
           {/* <!-- Examples --> */}
           <div className="relative pe-4 sm:pe-6 lg:pe-8 me-[calc(-1px-(100vw-100%)/2)] after:absolute after:inset-y-0 after:end-0 after:z-10 after:w-20 sm:after:w-24 xl:after:w-44 after:h-full after:bg-gradient-to-l after:from-white">
             <div className="flex overflow-x-auto space-x-3 md:space-x-6 pb-3 [&amp;::-webkit-scrollbar]:h-2 [&amp;::-webkit-scrollbar-thumb]:rounded-full [&amp;::-webkit-scrollbar-track]:bg-gray-100 [&amp;::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&amp;::-webkit-scrollbar-track]:bg-neutral-700 dark:[&amp;::-webkit-scrollbar-thumb]:bg-neutral-500">
-              {PORTFOLIO.filter((item) => item.home).map((portfolio) => (
-                <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Loading />}>
+                {PORTFOLIO.filter((item) => item.home).map((portfolio) => (
                   <ProjectSlider key={portfolio.id} {...portfolio} />
-                </Suspense>
-              ))}
+                ))}
+              </Suspense>
             </div>
           </div>
           {/* <!-- End Examples --> */}
@@ -52,7 +48,13 @@ const Test = () => {
   );
 };
 
-const ProjectSlider = memo(({ link, image, images_link, title, project }) => {
+const ProjectSlider = memo(function ProjectSlider({
+  link,
+  image,
+  images_link,
+  title,
+  project,
+}) {
   return (
     <Link
       className="sm:pb-8 pb-0 sm:px-8 overflow-hidden  isolate snap-center group shrink-0 relative w-96 sm:w-[500px] lg:w-[640px] h-auto bg-gray-50 rounded-2xl p-2 md:p-4 before:absolute before:inset-0 before:z-10 before:border before:border-gray-200 before:rounded-2xl before:transition before:hover:border-2 before:hover:border-blue-600 before:hover:shadow-lg"
@@ -65,7 +67,12 @@ const ProjectSlider = memo(({ link, image, images_link, title, project }) => {
       <span className="overflow-hidden">
         <Image
           className="rounded-xl shadow-sm"
-          src={"/images/projects/" + images_link + "/" + image}
+          src={
+            "https://cdc.construction/images/projects/" +
+            images_link +
+            "/" +
+            image
+          }
           alt={title}
           width={1300}
           height={800}

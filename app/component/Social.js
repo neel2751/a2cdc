@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const Social = () => {
+const Social = memo(() => {
   return (
     <div className="space-x-4">
       <Link
@@ -12,7 +12,7 @@ const Social = () => {
         rel="noopener noreferrer"
       >
         <Image
-          src="/images/social/facebook.svg"
+          src="https://cdc.construction/images/social/facebook.svg"
           width={24}
           height={24}
           alt="Facebook"
@@ -25,7 +25,7 @@ const Social = () => {
         rel="noopener noreferrer"
       >
         <Image
-          src="/images/social/instagram.svg"
+          src="https://cdc.construction/images/social/instagram.svg"
           width={24}
           height={24}
           alt="Facebook"
@@ -38,7 +38,7 @@ const Social = () => {
         rel="noopener noreferrer"
       >
         <Image
-          src="/images/social/youtube.svg"
+          src="https://cdc.construction/images/social/youtube.svg"
           width={24}
           height={24}
           alt="Facebook"
@@ -61,7 +61,7 @@ const Social = () => {
         rel="noopener noreferrer"
       >
         <Image
-          src="/images/social/linkedin.svg"
+          src="https://cdc.construction/images/social/linkedin.svg"
           width={24}
           height={24}
           alt="Facebook"
@@ -69,6 +69,6 @@ const Social = () => {
       </Link>
     </div>
   );
-};
+});
 
 export default Social;

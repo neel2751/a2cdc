@@ -4,6 +4,7 @@ import Navbar from "@/app/component/Header/navbar";
 import { SubMenu } from "@/app/component/Header/submenu";
 import { PORTFOLIO } from "@/app/data/data";
 import ProjectDetail from "./ProjectDetail";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params }) {
   // read route params
@@ -43,7 +44,9 @@ export default function Page({ params }) {
       <SubMenu>
         <Navbar />
       </SubMenu>
-      <ProjectDetail data={project} />
+      <Suspense fallback="loading...">
+        <ProjectDetail data={project} />
+      </Suspense>
       {/* {project ? <NotFound /> : <ProjectDetail data={project} />} */}
       <Footer />
     </>
