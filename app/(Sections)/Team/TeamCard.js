@@ -29,9 +29,9 @@ const TeamCard = memo(function TeamCard({ teamdata, category }) {
                     loading="lazy"
                     className="hover:grayscale-0 transition duration-300 ease-in-out rounded-lg object-cover sm:rounded-none sm:rounded-l-lg group-hover:scale-110 "
                     src={
-                      item.image.startsWith("/") ? item.image : `${item.image}`
+                      item.image.startsWith("/") ? item.image : `/${item.image}`
                     }
-                    alt={`${item.firstName} ${item.lastName}'s picture`}
+                    alt={`${item.name}'s picture.`}
                   />
                 </div>
               ) : (
