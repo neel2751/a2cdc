@@ -58,7 +58,7 @@ const ProjectDetail = memo(function ProjectDetail({ data }) {
               <p className="text-lg text-gray-800">{data?.description}</p>
             </div>
             {/* Render the virtualized image list */}
-            <Try imagesLink={data.images} imagesUrl={data.images_link} />
+            <ImageList imagesLink={data.images} imagesUrl={data.images_link} />
           </div>
         </div>
       </div>

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"app/(Sections)/Projects/[slug]/[subslug]/ProjectDetail.js -> ./ImageList\":{\"id\":\"app/(Sections)/Projects/[slug]/[subslug]/ProjectDetail.js -> ./ImageList\",\"files\":[\"static/chunks/_app-pages-browser_app_Sections_Projects_slug_subslug_ImageList_jsx.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST='{"app/(Sections)/Projects/[slug]/[subslug]/ProjectDetail.js -> ./ImageList":{"id":9598,"files":["static/chunks/598.5c8095cbaf7fcce4.js"]}}';
