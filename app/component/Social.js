@@ -56,7 +56,8 @@ const Social = memo(() => {
       </Link>
       <Link
         className="inline-block text-neutral-600"
-        href="https://www.linkedin.com/company/creative-design-construction-limited/"
+        // href="https://www.linkedin.com/company/creative-design-construction-limited/"
+        href="https://www.linkedin.com/company/creative-design-and-construction-limited/"
         target="_blank"
         rel="noopener noreferrer"
       >

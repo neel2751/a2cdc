@@ -54,13 +54,12 @@ const ImageList = ({ imagesLink, imagesUrl }) => {
     const updateLayout = () => {
       const width = window.innerWidth;
       setWindowWidth(width);
-
       if (width <= 640) {
         setImagesPerRow(1); // Small screens (mobile)
       } else if (width <= 1024) {
         setImagesPerRow(2); // Medium screens (tablet)
       } else {
-        setImagesPerRow(2); // Large screens (desktop)
+        setImagesPerRow(3); // Large screens (desktop)
       }
 
       // Dynamically calculate item height based on the image aspect ratio and imagesPerRow
@@ -79,7 +78,7 @@ const ImageList = ({ imagesLink, imagesUrl }) => {
 
   return (
     <div
-      className="grid gap-2"
+      className="grid gap-2 grid-cols-3 sm:grid-cols-4"
       style={{
         gridTemplateColumns: `repeat(${imagesPerRow}, 1fr)`, // Dynamically set grid layout
       }}

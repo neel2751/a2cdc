@@ -2,6 +2,7 @@
 import React, { memo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Try from "./try";
 // import { ImageList } from "./ImageList";
 
 // Dynamically import the ImageList component
@@ -57,7 +58,7 @@ const ProjectDetail = memo(function ProjectDetail({ data }) {
               <p className="text-lg text-gray-800">{data?.description}</p>
             </div>
             {/* Render the virtualized image list */}
-            <ImageList imagesLink={data.images} imagesUrl={data.images_link} />
+            <Try imagesLink={data.images} imagesUrl={data.images_link} />
           </div>
         </div>
       </div>

@@ -219,6 +219,7 @@ const Navbar = () => {
                             height={1500}
                             width={1000}
                             className="aspect-[5/3] object-cover rounded-lg"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                         </Link>
                         <div className="grow pt-4 md:pt-0 mx-1 md:mx-0">
